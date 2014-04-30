@@ -2,6 +2,8 @@
 
 package logic;
 
+import java.util.List;
+
 /**
  *
  * @author Alan Moreno
@@ -10,6 +12,7 @@ public class Estado {
     
     private String tag;
     private Enum type;
+    List transiciones;
     
     public Estado(){}
     public Estado(String tag, Enum type){
