@@ -47,16 +47,11 @@ public class Estado {
             Transicion t = (Transicion) it.next();
             System.out.println(t.getDestino().getTag()+"=("+t.getOrigen().getTag()+","+t.getCaracterDeEntrada()+")");
         }System.out.println();
+        
+        
+        
+        
     }
     
-	public Estado transition(Estado origin,String input){
-		for (Iterator object = this.transiciones.iterator(); object.hasNext();) {
-			Transicion transition = (Transicion) object.next();
-			if (transition.getCaracterDeEntrada().equals(input)) {
-				return transition.getTransition();
-			}
-		}
-		return null;
-	}
     
 }

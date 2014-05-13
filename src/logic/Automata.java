@@ -1,5 +1,3 @@
-
-
 package logic;
 
 import java.util.ArrayList;
@@ -11,33 +9,37 @@ import java.util.List;
  * @author Alan Moreno
  */
 public class Automata {
-    
+
     //un automata tiene: un alfabeto, un conjunto de estados, un conjunto de transiciones,  un estado inicial, y un conjunto de estados finales
-    private String [] sigma;
-    private ArrayList Estados;
-    private ArrayList Transicion;
+    private String[] sigma;
+    private ArrayList<Estado> Estados;
+    private ArrayList<Transicion> Transiciones;
     private Estado estadoInicial;
-    private List estadosFinales;
-    
+    private ArrayList<Estado> estadosFinales;
     //estado en el que se encuentra la maquina de estados
     private Estado estadoActual;
+
+    public void setEstadoActual(Estado estadoActual) {
+        this.estadoActual = estadoActual;
+    }
 
     public Estado getEstadoActual() {
         return estadoActual;
     }
-    
-    public Automata(){}
 
-    public Automata(String[]sigma,ArrayList estados, ArrayList transiciones, Estado init, List finales){
+    public Automata() {
+    }
+
+    public Automata(String[] sigma, ArrayList<Estado> estados, ArrayList<Transicion> transiciones, Estado init, ArrayList<Estado> finales) {
         this.sigma = sigma;
         this.Estados = estados;
-        this.Transicion = transiciones;
+        this.Transiciones = transiciones;
         this.estadoInicial = init;
         this.estadosFinales = finales;
         this.estadoActual = estadoInicial;
     }
 
-    public Automata(String[]sigma,ArrayList estados, Estado init, List finales){
+    public Automata(String[] sigma, ArrayList<Estado> estados, Estado init, ArrayList<Estado> finales) {
         this.sigma = sigma;
         this.Estados = estados;
         this.estadoInicial = init;
@@ -58,7 +60,7 @@ public class Automata {
     }
 
     public List getTransicion() {
-        return Transicion;
+        return Transiciones;
     }
 
     public Estado getEstadoInicial() {
@@ -68,24 +70,21 @@ public class Automata {
     public List getEstadosFinales() {
         return estadosFinales;
     }
-    
-    public void print()
-    {
+
+    public void print() {
         for (Iterator it = Estados.iterator(); it.hasNext();) {
-            Estado curr = (Estado)it.next();
+            Estado curr = (Estado) it.next();
             curr.printTransitions();
         }
     }
-    
-    /**
-     * 
-     * origen y caracter de entrada
-     * ///*/
-    public void trascender(Estado origen, String input)
-    {
-        Estado nuevo = origen.transition(origen, input);
-        this.estadoActual = nuevo;
+
+    void trascender(Estado estadoActual, String string) {
+
+        for (Transicion tr : Transiciones) {
+            if (tr.getOrigen().equals(estadoActual)&&tr.getCaracterDeEntrada().equals(string)) {
+                this.estadoActual = tr.getTransition();
+            }
+        }
     }
-    
-    
+
 }
